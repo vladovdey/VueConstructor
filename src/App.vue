@@ -3,8 +3,10 @@
     <Header />
     <div class="container-fluid">
       <div class="row">
-        <ProductTypes v-bind:types="types"/>
-        <Pizza />
+        
+        <ProductTypes @addIngrid="addPizza" v-bind:types="types"/>
+        
+        <Pizza v-bind:products='selectedProduct'/>
       </div>
     </div>
   </div>
@@ -26,12 +28,18 @@ export default {
   data() {
     return {
       types: [
-        {id:0 , title:"Мясо"},
-        {id:0 , title:"Cыр"},
-        {id:0 , title:"Соус"}
-      ]  
+        {id:0 , title:"Мясо", price: 12 },
+        {id:1 , title:"Cыр", price: 15 },
+        {id:2 , title:"Соус", price: 6 }
+      ],
+      selectedProduct: []
     }
   },
+  methods: {
+    addPizza(elem){
+      this.selectedProduct.push(elem);
+    }
+  }
 }
 </script>
 
