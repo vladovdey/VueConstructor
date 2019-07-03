@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <div class="container-fluid">
+    <div class="container-fluid content">
       <div class="row">
         <ProductTypes @addIngrid="addPizza" v-bind:types="types" />
         <Cart @delIngrid="delPizza" :cartProducts="selectedProduct" :totalPrice="price" />
@@ -107,15 +107,12 @@ export default {
   methods: {
     addPizza(elem) {
       let addbool = true;
-
-      if (this.selectedProduct.length == 1) {
-       
+      
+      if (this.selectedProduct.length == 0) {
         this.selectedProduct.push(elem);
       } else {
-        this.selectedProduct.forEach(function(arrayElem, index) {
-          if (
-            arrayElem.prodId == elem.prodId 
-          ) {
+        this.selectedProduct.forEach(function(arrayElem) {
+          if (arrayElem.prodId == elem.prodId) {
             addbool = false;
           }
         });
@@ -125,9 +122,19 @@ export default {
           addbool = true;
         }
       }
-      
-    },
 
+      this.price = calc(this.selectedProduct);
+      console.log(this.price);
+
+      function calc(array){
+        let sum=0;
+        array.forEach(elem=>{
+          sum += elem.price*elem.porc;
+        });
+        return sum+85;
+      }  
+    },
+    
     delPizza(product) {
       if (product.prodId != 0) {
         let delIndex = 1;
@@ -137,6 +144,7 @@ export default {
           }
         });
         this.selectedProduct.splice(delIndex, 1);
+        
       }
     }
   }
@@ -144,6 +152,10 @@ export default {
 </script>
 
 <style>
+.content{
+  margin-top: 20px;
+}
+
 :active,
 :hover,
 :focus {

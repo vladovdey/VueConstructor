@@ -1,7 +1,10 @@
 <template>
   <div class="col-12 col-md-8">
-          <img class="ingrid" v-for="product in cartProducts" :src="product.img" :key="product.prodId" >
+    <div class="img">
+      <img class="ingrid" v-for="product in cartProducts" :src="product.img" :key="product.prodId" >
       <img src="../assets/pizza.png" alt="pizzaimg">
+    </div>
+
     <h3>Ваша пицца</h3>
 
     <table class="table table-bordered table-hover">
@@ -24,7 +27,7 @@
       </tbody>
     </table>
 
-    <div @> 
+    <div> 
       <p>Итоговая цена: {{totalPrice}} руб.</p>   
       <button>Сделать заказ</button>
     </div>
@@ -41,11 +44,15 @@ export default {
     totalPrice: {
       type: Number
     }
-  }
+  },
 };
 </script>
 
 <style scoped>
+.img{
+  text-align: center;
+}
+
 button{
     border-radius: 10px;
     font-size: 20px;
