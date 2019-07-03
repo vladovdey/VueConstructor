@@ -13,8 +13,9 @@ export default {
 </script>
 
 <style scoped>
-div{
-padding-bottom: 100px ;
+  div{
+  padding-bottom: 20px ;
+  border-bottom: 1px solid black;
 }
 
 </style>
